@@ -1,8 +1,11 @@
 
-
-
 export default function SearchStocks(props){ 
 
+    // const handelInput = (str) =>{
+    //     str = str.toUpperCase()
+    //     setStock(str)
+    //     console.log('setStock =', stock)
+    // }
 
 
 return (
@@ -12,8 +15,6 @@ return (
             <br></br>
             <br></br>
             <input type="text" value={props.value} onChange={props.onChange} id="search-pane-input" placeholder="Search for Company"/>
-            {/* <br></br>
-            <button onClick={props.onClick} class="search-bt" id="search-pane-button">Search</button> */}
         </div>
 
     </div>

@@ -4,56 +4,77 @@ import StockList from "./StockList";
 import { Search } from "../services/Constants";
 
 
-
-
-export default function SearchResults(props){
-    // inittialize the image list to the full list passed in props
+export default function SearchResults(){
+    // inittialize the ticker list to the full list passed in props
     const [stockSearch, setStockSearch] = useState([])
+    const [stockName, setStockName] = useState('')
+    console.log('stockName =', stockName)
     
-    const fetchData = async (company) => {
+    // const handleStockChange = () => {
+    const fetchData = async (event) => {
+      // event.preventDefault();
+
+
         try {
-          const response = await Search(company);
+          const response = await Search(event);
           setStockSearch(response);
           console.log('setStockSearch=', setStockSearch);
         } catch (error) {
           console.log(error);
         }
       }
+    // }
     
     //handle the filter, and upstate when the filter value changes
     //store the filter state and filter the list of gifs to display
+
+
     const handleStockChange = (event) => {
-        event.preventDefault();
-        
+      // event.preventDefault();
 
-        //  grab value from event
-        const stockName = event.target.value;
-        <StockList ticker={stockName} />
-        // setStockSearch((_prevState) =>{
-        //     remove gifs that don't contain the filter value
-        //     const filteredStockList = props.gifs.filter((image) => {
-        //     return image.toLowerCase().includes(stockName.toLowerCase());
-        //     });
-        // return filteredStockList
-        // return s tockName
-        // }
-        fetchData(stockName);
-        // console.log('THIS IS fetchData= ' + fetchData('dog'));
+    //     console.log("This is EVENT=", event)
+    //     const tickerClick = event; 
+        setStockName(event)
+
+    //  grab value from event
+    //  const stockName = event.target.value;
+    //  console.log(tickerClick)
+
+        // return (
+        //   <div>
+        // <StockList stock={stockSearch} />
+        // </div>
+        // )
+  
     }
-    // console.log(handleStockChange)
-
+    
 
     useEffect( () => {
-        fetchData();
-        console.log("do something", stockSearch)
-    }, [])
+      fetchData(stockName)
+      // .then(res => setStockSearch(res))
+  }, [stockName])
+  console.log(stockSearch)
+    
 
 
     
     return (
-        <div><h1>This is the SearchStock Section</h1>
-        <SearchStocks onClick={handleStockChange} onChange={(e) => handleStockChange(e)} />
+        <div>
+          <h1>This is the SearchStock Section</h1>
         <br></br>
+        <div className="search-section">
+        <div>
+            <label htmlFor="search-gif">Search by Company Name: </label>
+            <br></br>
+            <br></br>
+              <form onSubmit={handleStockChange}>
+              <input type="text" value={stockName} onChange={event => handleStockChange(event.target.value)} id="search-pane-input" placeholder="Search for Company"/>
+            <div className="button-div">
+              <button type="submit" >Search Ticker</button>
+            </div>
+            </form>
+        </div>
+    </div>
         <StockList stock={stockSearch} />
         </div>
 

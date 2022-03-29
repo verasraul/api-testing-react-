@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Constants } from '../services/Constants';
+import StockList from './StockList';
 
 
 export default function RandomStock(){
@@ -7,33 +8,31 @@ export default function RandomStock(){
     const fetchData = async () => {
         try {
           const response = await Constants();
-          setStocks(response.companyName);
+          setStocks(response);
           // console.log(setStocks);
         } catch (error) {
           console.log(error);
         }
       }
     console.log(fetchData);
+
     useEffect(() => {
       fetchData();
     }, [])
 
-    // const handleButton = () => {
-    //   if (stocks){
-    //     fetchData();
-    //   return (
-    //   <img src= { stocks }/>
-    //   )
-    //   }
-    // }
+    const handleButton = () => {
+        <StockList stock={stocks} /> 
+      }
+    
 
     return(
           <div>
-          <div> { stocks } </div>
+          {/* <div> <ul>{ stocks }</ul> </div> */}
           <br></br>
-          <button onClick= {fetchData}>
+          <button onClick={handleButton}>
             Generate Stock
           </button>
+          
         </div>
     )
 }

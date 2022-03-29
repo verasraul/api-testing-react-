@@ -15,8 +15,8 @@ function App() {
         {/* 'NavLink' links your pages. */}
         <nav>
           <NavLink to={"/"} >Home</NavLink>
-          <NavLink to={"/random"} >Random-Stock</NavLink>
           <NavLink to={"/search"} >Search-Stocks</NavLink>
+          <NavLink to={"/random"} >Random-Stock</NavLink>
         </nav>  
       </div>
 
@@ -25,8 +25,8 @@ function App() {
       <Routes>
       // 'Route' in singular form is a self-closing tag.
         <Route path='/' element={<Home /> } />
-        <Route path='random' element={<RandomStock /> } />
         <Route path='search' element={<SearchResults /> } />
+        <Route path='random' element={<RandomStock /> } />
       </Routes>
      
       </div>
